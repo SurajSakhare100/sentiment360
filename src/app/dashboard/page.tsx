@@ -1,9 +1,6 @@
-'use client'
 import { redirect } from 'next/navigation'
 import { getServerSession } from 'next-auth'
 import DashboardContent from '@/components/dashboard/DashboardContent'
-import { MoveLeft } from 'lucide-react'
-import Router from 'next/router'
 
 export default async function DashboardPage() {
   const session = await getServerSession()

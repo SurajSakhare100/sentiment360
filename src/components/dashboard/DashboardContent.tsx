@@ -316,7 +316,6 @@ export default function DashboardContent() {
         const newBusinesses = Array.from(new Set([...prev, comparedBusinessName]))
         return newBusinesses
       })
-      setComparedBusinessName('')
       
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch discussions')
@@ -519,7 +518,7 @@ export default function DashboardContent() {
                 <div className="flex-1 grid grid-cols-2 gap-4">
                   <input
                     type="text"
-                    value={businessName}
+                    value={businesses[0] || businessName}
                     onChange={(e) => setBusinessName(e.target.value)}
                     placeholder="Enter first business name"
                     className="px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-gray-900 bg-white"
@@ -542,16 +541,16 @@ export default function DashboardContent() {
                       setBusinessName('')
                       setComparedBusinessName('')
                     }}
-                    className={getButtonStyle(false, 4)}
+                    className="px-4 py-3 text-black border border-gray-200 rounded-lg hover:border-primary transition-colors"
                   >
                     Exit Compare
                   </button>
                   <button
                     onClick={businesses.length === 0 ? handleAnalyze : handleCompare}
                     disabled={loading || (!businessName && businesses.length === 0) || (!comparedBusinessName && businesses.length > 0) || businesses.length >= 2}
-                    className="px-8 py-3  text-black border border-gray-200 rounded-lg hover:bg-primary disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    className="px-8 py-3 text-black border border-gray-200 rounded-lg hover:border-primary disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >
-                    {loading ? 'Analyzing...' : businesses.length === 0 ? 'Compare' : 'Add Business'}
+                    {loading ? 'Analyzing...' : businesses.length === 0 ? 'Compare' : 'Compare'}
                   </button>
                 </div>
               </>
@@ -568,9 +567,8 @@ export default function DashboardContent() {
                   <button
                     onClick={() => {
                       setComparisonMode(true)
-                      setBusinessName('')
                     }}
-                    className={getButtonStyle(false)}
+                    className="px-4 py-3 text-black border border-gray-200 rounded-lg hover:border-primary transition-colors"
                   >
                     Compare Mode
                   </button>
