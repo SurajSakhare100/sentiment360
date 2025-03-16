@@ -549,7 +549,7 @@ export default function DashboardContent() {
                   <button
                     onClick={businesses.length === 0 ? handleAnalyze : handleCompare}
                     disabled={loading || (!businessName && businesses.length === 0) || (!comparedBusinessName && businesses.length > 0) || businesses.length >= 2}
-                    className="px-8 py-3 bg-primary text-black border border-gray-200 rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    className="px-8 py-3  text-black border border-gray-200 rounded-lg hover:bg-primary disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >
                     {loading ? 'Analyzing...' : businesses.length === 0 ? 'Compare' : 'Add Business'}
                   </button>
@@ -577,7 +577,7 @@ export default function DashboardContent() {
                   <button
                     onClick={handleAnalyze}
                     disabled={loading || !businessName}
-                    className="px-8 py-3 bg-primary text-black border border-gray-200 rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    className="px-8 py-3 text-black border border-gray-200 rounded-lg hover:border-primary disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >
                     {loading ? 'Analyzing...' : 'Analyze'}
                   </button>
