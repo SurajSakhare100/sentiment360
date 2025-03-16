@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import { AuthProvider } from '@/components/providers/AuthProvider'
 import { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/react'
+import { Nav } from '@/components/nav'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
@@ -42,6 +43,7 @@ export default function RootLayout({
     <html lang="en" >
       <body className={`${inter.variable} font-sans antialiased min-h-screen bg-background`}>
         <AuthProvider>
+          <Nav />
           <main className="relative flex min-h-screen flex-col">
             {children}
           </main>

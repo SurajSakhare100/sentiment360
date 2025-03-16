@@ -5,7 +5,7 @@ import { Check } from "lucide-react"
 
 export default function PricingPage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" id="pricing">
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-b from-background to-muted">
         <div className="container space-y-8 text-center">

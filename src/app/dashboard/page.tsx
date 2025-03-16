@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useSession } from 'next-auth/react'
+import { useSession, signOut } from 'next-auth/react'
 import DashboardContent from '@/components/dashboard/DashboardContent'
-import { MoveLeftIcon } from 'lucide-react'
+import { MoveLeftIcon, LogOutIcon } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 export default function DashboardPage() {
   const { data: session, status } = useSession()
@@ -25,19 +26,44 @@ export default function DashboardPage() {
     }
   }, [status, router, session])
 
+  const handleLogout = () => {
+    if (isGuest) {
+      localStorage.removeItem("guestToken")
+      router.push('/signin')
+    } else {
+      signOut({ callbackUrl: '/signin' })
+    }
+  }
+
   if (status === "loading" && !isGuest) {
     return <div className="min-h-screen flex items-center justify-center">Loading...</div>
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-primary-900 pl-16">
-          <span className='flex items-center gap-2'>
-            <MoveLeftIcon onClick={() => router.push('/')} className="cursor-pointer" />
-            Welcome back, {userName}
-          </span>
-        </h1>
+      <div className="container mx-auto py-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 px-4">
+          <div className="flex items-center gap-2 mb-4 sm:mb-0 ">
+            <MoveLeftIcon 
+              onClick={() => router.push('/')} 
+              className="cursor-pointer" 
+              size={24}
+            />
+            <h1 className="text-xl sm:text-3xl font-bold text-primary-900">
+              Welcome back, {userName}
+            </h1>
+          </div>
+          
+          <Button 
+            variant="outline" 
+            className="flex items-center gap-2"
+            onClick={handleLogout}
+          >
+            <LogOutIcon size={18} />
+            <span>Logout</span>
+          </Button>
+        </div>
+        
         <DashboardContent />
       </div>
     </div>

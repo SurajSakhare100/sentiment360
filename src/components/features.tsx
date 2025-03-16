@@ -21,7 +21,7 @@ import Image from "next/image"
 import dashboard from "../../public/images/dashboard.png"
 export default function FeaturesPage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" id="features">
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-b from-background to-muted">
         <div className="container space-y-8 text-center">

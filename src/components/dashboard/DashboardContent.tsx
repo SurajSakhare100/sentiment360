@@ -506,13 +506,13 @@ export default function DashboardContent() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6">
+    <div className="max-w-9xl  mx-auto px-4 py-6">
       <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl font-semibold mb-6 text-center text-gray-900">
             Analyze Business Sentiment
           </h2>
-          <div className="flex gap-4">
+          <div className="flex gap-4 flex-col sm:flex-row">
             {comparisonMode ? (
               <>
                 <div className="flex-1 grid grid-cols-2 gap-4">
