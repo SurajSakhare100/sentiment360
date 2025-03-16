@@ -1,12 +1,35 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
 import { AuthProvider } from '@/components/providers/AuthProvider'
+import { Metadata } from 'next'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
-export const metadata = {
-  title: 'Sentiment360 - Business Sentiment Analysis Tool',
-  description: 'Real-time sentiment analysis for business reviews and social media mentions',
+export const metadata: Metadata = {
+  title: 'Sentiment360 - Real-Time Customer Feedback Analysis',
+  description: 'Transform customer feedback into actionable insights with AI-powered sentiment analysis',
+  icons: {
+    icon: [
+      {
+        url: '/images/logo.png',
+        href: '/images/logo.png',
+      }
+    ],
+    apple: [
+      {
+        url: '/images/logo.png',
+        sizes: '180x180',
+        type: 'image/png',
+      }
+    ],
+    shortcut: [
+      {
+        url: '/images/logo.png',
+        type: 'image/png',
+      }
+    ],
+  },
+  manifest: '/site.webmanifest',
 }
 
 export default function RootLayout({
