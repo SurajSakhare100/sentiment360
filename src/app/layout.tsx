@@ -43,7 +43,6 @@ export default function RootLayout({
     <html lang="en" >
       <body className={`${inter.variable} font-sans antialiased min-h-screen bg-background`}>
         <AuthProvider>
-          <Nav />
           <main className="relative flex min-h-screen flex-col">
             {children}
           </main>
