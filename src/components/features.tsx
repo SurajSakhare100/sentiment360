@@ -17,7 +17,8 @@ import {
   RefreshCcw,
   Share2
 } from "lucide-react"
-
+import Image from "next/image"
+import dashboard from "../../public/images/dashboard.png"
 export default function FeaturesPage() {
   return (
     <div className="min-h-screen">
@@ -33,6 +34,7 @@ export default function FeaturesPage() {
           </p>
         </div>
       </section>
+      
 
       {/* Core Features */}
       <section className="container pt-20 pb-10">
@@ -48,6 +50,18 @@ export default function FeaturesPage() {
               </CardContent>
             </Card>
           ))}
+        </div>
+      </section>
+      {/* Features Image Section */}
+      <section className="container py-12">
+        <div className="flex justify-center">
+          <Image
+            src={dashboard}
+            alt="Sentiment Analysis Features"
+            width={800}
+            height={600}
+            className="rounded-2xl shadow-2xl scale-110"
+          />
         </div>
       </section>
 

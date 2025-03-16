@@ -19,9 +19,10 @@ import { Footer } from "@/components/footer"
 import FeaturesPage from "@/components/features"
 import PricingPage from "@/components/pricing"
 export default function LandingPage() {
+  
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Navigation */}
+
       <Nav/>
 
       {/* Hero Section with Real-time Focus */}

@@ -1,40 +1,26 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { signIn } from "next-auth/react"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 
 export default function SignIn() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleGuestLogin = async () => {
     setIsLoading(true)
-
-    try {
-      const result = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      })
-
-      if (result?.error) {
-        throw new Error(result.error)
-      }
-
-      router.push("/dashboard")
-    } catch (error) {
-      console.error(error)
-      // Handle error (show toast notification, etc.)
-    } finally {
-      setIsLoading(false)
-    }
+    
+    // Store a guest token in localStorage
+    localStorage.setItem("guestToken", "guest-" + Date.now())
+    
+    // Redirect to dashboard
+    router.push("/dashboard")
+    
+    setIsLoading(false)
   }
 
   return (
@@ -43,58 +29,33 @@ export default function SignIn() {
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold">Sign in</CardTitle>
           <CardDescription>
-            Enter your email and password to access your dashboard
+            Choose how you want to access your dashboard
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <Input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
+          <div className="space-y-4">
             <Button 
-              type="submit" 
-              className="w-full" 
+              variant="outline" 
+              className="w-full flex items-center justify-center gap-2"
+              onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
               disabled={isLoading}
             >
-              {isLoading ? "Signing in..." : "Sign in"}
+              <Image 
+                src="/google-logo.svg" 
+                alt="Google" 
+                width={20} 
+                height={20} 
+              />
+              Continue with Google
             </Button>
-          </form>
-
-          <div className="mt-4 text-center">
-            <p className="text-sm text-muted-foreground">
-              Or continue with
-            </p>
-            <div className="mt-4 space-y-2">
-              <Button 
-                variant="outline" 
-                className="w-full"
-                onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
-              >
-                Continue with Google
-              </Button>
-              <Button 
-                variant="outline" 
-                className="w-full"
-                onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
-              >
-                Continue with GitHub
-              </Button>
-            </div>
+            
+            <Button 
+              className="w-full"
+              onClick={handleGuestLogin}
+              disabled={isLoading}
+            >
+              Continue as Guest
+            </Button>
           </div>
         </CardContent>
       </Card>
